@@ -112,6 +112,10 @@ function routeStopEta (stopId, route, direction, stopName, destination){
 	let etaTime, remark, stopSeq = 0, scheduled, departureList;
 	console.log(stopId, route, direction);
 	
+	if (route == "705" || route == "706"){
+		destination = "天水圍循環綫";
+	}
+	
 	const url = "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule?station_id=" + stopId;
 	const xhttpr = new XMLHttpRequest();
 	
