@@ -45,7 +45,7 @@ xhttpr.onload = ()=> {
 			routeInfo(list[i]["route"], "inbound", function(data){
 				apiResponded += 0.5;
 				if (data != ""){
-					routeList.push({route: list[i]["route"], dest_tc: list[i]["dest_tc"], orig_tc: list[i]["orig_tc"].split("(經")[0], dir: "I"});
+					routeList.push({route: list[i]["route"], dest_tc: list[i]["dest_tc"], orig_tc: list[i]["orig_tc"].split("(經")[0], dir: "O"});
 				}
 				if (apiResponded >= list.length){
 					finishRoute(routeList);
