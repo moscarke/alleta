@@ -1,7 +1,38 @@
+const customSort = (a, b) => {
+	var a = String(a["route"]);
+	var b = String(b["route"]);
+	const regex = /([A-Za-z]+)?(\d+)([A-Za-z]+)?/;
+	const [, prefixA, numberA, suffixA] = a.toString().match(regex);
+	const [, prefixB, numberB, suffixB] = b.toString().match(regex);
+
+	if (prefixA !== prefixB) {
+	if (!prefixA) return -1;
+	if (!prefixB) return 1;
+		return prefixA.localeCompare(prefixB);
+	}
+
+	if (isNaN(numberA) || isNaN(numberB)) {
+		return a.localeCompare(b);
+	}
+
+	if (numberA !== numberB) {
+		return Number(numberA) - Number(numberB);
+	}
+
+	if (suffixA && suffixB) {
+		return suffixA.localeCompare(suffixB);
+	}
+
+	if (suffixA) return 1;
+	if (suffixB) return -1;
+
+	return 0;
+};
+
 const url = "https://rt.data.gov.hk/v2/transport/citybus/route/ctb";
 const xhttpr = new XMLHttpRequest();
 const routeList = [];
-let apiResponded = 0;
+let apiResponded = 1;
 xhttpr.open("GET", url, true);
 
 xhttpr.send();
@@ -12,54 +43,33 @@ xhttpr.onload = ()=> {
 		const list = response["data"];
 		for (let i = 0; i < list.length; i++){
 			routeInfo(list[i]["route"], "inbound", function(data){
-				apiResponded++;
+				apiResponded += 0.5;
 				if (data != ""){
 					routeList.push({route: list[i]["route"], dest_tc: list[i]["dest_tc"], orig_tc: list[i]["orig_tc"].split("(經")[0], dir: "I"});
 				}
-				if (apiResponded == list.length){
+				if (apiResponded >= list.length){
 					finishRoute(routeList);
 				}
 			});
 			routeInfo(list[i]["route"], "outbound", function(data){
-				apiResponded++;
+				apiResponded += 0.5;
 				if (data != ""){
 					routeList.push({route: list[i]["route"], orig_tc: list[i]["dest_tc"].split("(經")[0], dest_tc: list[i]["orig_tc"], dir: "I"});
 				}
-				if (apiResponded == list.length){
+				if (apiResponded >= list.length){
 					finishRoute(routeList);
 				}
 			});
 		}
 	} else {
+		apiResponded += 0.5;
 		//idk do sth
 	}
 }
 
 function finishRoute (routeList){
 	let x = "<tr><td style='width:14%;'><strong>路線</strong></td><td style='width:86%;'><strong>方向</strong></td></tr>";
-	routeList.sort(function(a, b) {
-		var routeA = String(a["route"]);
-		var routeB = String(b["route"]);
-
-		var numA = parseInt(routeA, 10);
-		var numB = parseInt(routeB, 10);
-		var alphaA = routeA.replace(numA, "");
-		var alphaB = routeB.replace(numB, "");
-
-		if (numA < numB) {
-			return -1;
-		} else if (numA > numB) {
-			return 1;
-		}
-
-		if (alphaA < alphaB) {
-			return -1;
-		} else if (alphaA > alphaB) {
-			return 1;
-		}
-
-		return 0;
-	});
+	routeList.sort(customSort);
 	for (let i = 0;i < routeList.length; i++){
 		if (routeList[i]["dir"] == "I"){
 			dir = "inbound";
