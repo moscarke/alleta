@@ -186,7 +186,7 @@ function routeStopEta (stopId, route, direction, stopName, serviceType){
 				}
 			}
 			if (x == "<tr><td><strong></strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>"){
-				x = "<tr><td><strong>未來60分鐘沒有由此站開出的班次</strong></td><td><input type='button' class='btnEta' value='循環線請按此' onclick=\"routeStopEta('" + stopId + "', '" + route + "', '" + oppositeDirection + "', '" + stopName + "')\" ></td><tr>";
+				x = "<tr><td><strong>未來60分鐘沒有由此站開出的班次</strong></td><tr>";
 			}
 			document.getElementById("stationTable").innerHTML = x;
 			document.getElementById("stationList").style.display = "block";
