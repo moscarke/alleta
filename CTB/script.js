@@ -32,7 +32,7 @@ const customSort = (a, b) => {
 const url = "https://rt.data.gov.hk/v2/transport/citybus/route/ctb";
 const xhttpr = new XMLHttpRequest();
 const routeList = [];
-let apiResponded = 1;
+let apiResponded = 0;
 xhttpr.open("GET", url, true);
 
 xhttpr.send();
@@ -45,7 +45,7 @@ xhttpr.onload = ()=> {
 			routeInfo(list[i]["route"], "inbound", function(data){
 				apiResponded += 0.5;
 				if (data != ""){
-					routeList.push({route: list[i]["route"], dest_tc: list[i]["dest_tc"], orig_tc: list[i]["orig_tc"].split("(經")[0], dir: "O"});
+					routeList.push({route: list[i]["route"], dest_tc: list[i]["orig_tc"], orig_tc: list[i]["dest_tc"].split("(經")[0], dir: "I"});
 				}
 				if (apiResponded >= list.length){
 					finishRoute(routeList);
@@ -54,7 +54,7 @@ xhttpr.onload = ()=> {
 			routeInfo(list[i]["route"], "outbound", function(data){
 				apiResponded += 0.5;
 				if (data != ""){
-					routeList.push({route: list[i]["route"], orig_tc: list[i]["dest_tc"].split("(經")[0], dest_tc: list[i]["orig_tc"], dir: "I"});
+					routeList.push({route: list[i]["route"], orig_tc: list[i]["orig_tc"].split("(經")[0], dest_tc: list[i]["dest_tc"], dir: "O"});
 				}
 				if (apiResponded >= list.length){
 					finishRoute(routeList);
@@ -77,7 +77,7 @@ function finishRoute (routeList){
 			dir = "outbound";
 		}
 		x = x + "<tr><td>" + routeList[i]["route"] + "</td><td>";
-		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + dir + "', '" + routeList[i]["service_type"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
+		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + dir + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 	}
 	
 	document.getElementById("routeTable").innerHTML = x;
@@ -110,6 +110,8 @@ function hptoHome(){
 	document.getElementById("stopName").innerHTML = "";
 	searchRoute();
 	document.getElementById("routeList").style.display = "block";
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
 }
 
 // find all stops of a route given the route and direction
