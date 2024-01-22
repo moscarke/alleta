@@ -319,37 +319,3 @@ function allEta(stopId){
 		}
 	}
 }
-
-
-function showPosition(position) {
-var lat = position.coords.latitude;
-var long = position.coords.longitude;
-var location = [lat, long];
-google.script.run.logLocation(location);
-}
-
-function showError(error) {
-switch(error.code) {
-  case error.PERMISSION_DENIED:
-	var location = ["User denied the request for Geolocation."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.POSITION_UNAVAILABLE:
-	var location = ["Location information is unavailable."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.TIMEOUT:
-	var location = ["The request to get user location timed out."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.UNKNOWN_ERROR:
-	var location = ["An unknown error occurred."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-}
-}
-
