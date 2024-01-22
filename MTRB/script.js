@@ -50,7 +50,7 @@ xhttpr.onload = ()=> {
 			x = x + "<tr><td>" + routeList[i]["route"] + "</td><td>";
 			x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "', '" + routeList[i]["dest_tc"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 		}
-		document.getElementById("listTable").innerHTML = x;
+		document.getElementById("routeTable").innerHTML = x;
 		document.getElementById("routeList").style.display = "block";
 
 		document.getElementById("waiting").style.display = "none";
@@ -61,7 +61,15 @@ xhttpr.onload = ()=> {
 
 
 function hptoHome(){
-	window.location.reload();
+	document.getElementById("routeSearch").style.display = "block";
+	document.getElementById("stationList").style.display = "none";
+	document.getElementById("etaList").style.display = "none";
+	document.getElementById("routeNumber").innerHTML = "";
+	document.getElementById("stopName").innerHTML = "";
+	searchRoute();
+	document.getElementById("routeList").style.display = "block";
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
 }
 
 // find all stops of a route given the route and direction
@@ -105,8 +113,8 @@ function routeStop(route, direction, destination){
 				j = i + 1;
 				x = x + "<tr><td>" + j + "</td><td><button class='btnEta' style='text-align: left' onclick=\"routeStopEta('" + stationList[i]["id"] + "', '" + route + "', '" + direction + "', '" + stationList[i]["name"] + "', '" +  destination + "')\">" + stationList[i]["name"] + "</button></td></tr>";
 			}
-			document.getElementById("listTable").innerHTML = x;
-			document.getElementById("routeList").style.display = "block";
+			document.getElementById("stationTable").innerHTML = x;
+			document.getElementById("stationList").style.display = "block";
 			document.getElementById("loading").style.display = "none";
 			document.getElementById("routeNumber").innerHTML = "路線： " + route;
 		} else {
@@ -170,8 +178,8 @@ function routeStopEta (stopId, route, direction, stopName, destination){
 			if (x == "<tr><td><strong></strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>"){
 				x = "<tr><td><strong>未來60分鐘沒有由此站開出的班次</strong></td><tr>";
 			}
-			document.getElementById("stationTable").innerHTML = x;
-			document.getElementById("stationList").style.display = "block";
+			document.getElementById("etaTable").innerHTML = x;
+			document.getElementById("etaList").style.display = "block";
 			document.getElementById("backRoute").style.display = "flex";
 			document.getElementById("loading").style.display = "none";
 			document.getElementById("stopName").innerHTML = "巴士站： " + stopName;
@@ -184,7 +192,7 @@ function searchRoute(){
 	let input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("routeSearch");
 	filter = input.value.toUpperCase();
-	table = document.getElementById("listTable");
+	table = document.getElementById("routeTable");
 	tr = table.getElementsByTagName("tr");
 	for (i = 1; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName("td")[0];
@@ -200,43 +208,11 @@ function searchRoute(){
 }
 
 function backToStopList(){
-	document.getElementById("routeList").style.display = "block";
-	document.getElementById("stationList").style.display = "none";
+	document.getElementById("stationList").style.display = "block";
+	document.getElementById("etaList").style.display = "none";
 	document.getElementById("stopName").style.display = "none";
 	document.getElementById("backRoute").style.display = "none";
 }
 
 
-
-function showPosition(position) {
-var lat = position.coords.latitude;
-var long = position.coords.longitude;
-var location = [lat, long];
-google.script.run.logLocation(location);
-}
-
-function showError(error) {
-switch(error.code) {
-  case error.PERMISSION_DENIED:
-	var location = ["User denied the request for Geolocation."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.POSITION_UNAVAILABLE:
-	var location = ["Location information is unavailable."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.TIMEOUT:
-	var location = ["The request to get user location timed out."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-  case error.UNKNOWN_ERROR:
-	var location = ["An unknown error occurred."];
-	//alert(location[0]);
-	google.script.run.logLocation(location);
-	break;
-}
-}
 
