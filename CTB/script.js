@@ -80,7 +80,7 @@ function finishRoute (routeList){
 		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + dir + "', '" + routeList[i]["service_type"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 	}
 	
-	document.getElementById("listTable").innerHTML = x;
+	document.getElementById("routeTable").innerHTML = x;
 	document.getElementById("routeList").style.display = "block";
 
 	document.getElementById("waiting").style.display = "none";
@@ -103,7 +103,13 @@ function routeInfo(route, direction, callback){
 
 
 function hptoHome(){
-	window.location.reload();
+	document.getElementById("routeSearch").style.display = "block";
+	document.getElementById("stationList").style.display = "none";
+	document.getElementById("etaList").style.display = "none";
+	document.getElementById("routeNumber").innerHTML = "";
+	document.getElementById("stopName").innerHTML = "";
+	searchRoute();
+	document.getElementById("routeList").style.display = "block";
 }
 
 // find all stops of a route given the route and direction
@@ -142,8 +148,8 @@ function routeStop(route, direction){
 					oppositeDirection = "inbound";
 				}
 				let x = "<tr><td><strong>此路線沒有此方向</strong></td></tr><tr><td><input class='btnOrigin' type='button' value='按此搜尋相反方向' onclick=\"routeStop('" + route + "', '" + oppositeDirection + "')\"</td></tr>";
-				document.getElementById("listTable").innerHTML = x;
-				document.getElementById("routeList").style.display = "block";
+				document.getElementById("stationTable").innerHTML = x;
+				document.getElementById("stationList").style.display = "block";
 				document.getElementById("loading").style.display = "none";
 				document.getElementById("routeNumber").innerHTML = "路線： " + route;
 			}
@@ -181,8 +187,8 @@ function finishRouteStop(stationNameList, route, direction){
 		x = x + "<tr><td>" + stationNameList[i]["number"] + "</td><td><button class='btnEta' style='text-align: left' onclick=\"routeStopEta('" + stationNameList[i]["id"] + "', '" + route + "', '" + direction + "', '" + stationNameList[i]["name"] + "')\">" + stationNameList[i]["name"] + "</button></td></tr>";
 	}
 
-	document.getElementById("listTable").innerHTML = x;
-	document.getElementById("routeList").style.display = "block";
+	document.getElementById("stationTable").innerHTML = x;
+	document.getElementById("stationList").style.display = "block";
 	document.getElementById("loading").style.display = "none";
 	document.getElementById("routeNumber").innerHTML = "路線： " + route;
 }
@@ -251,8 +257,8 @@ function routeStopEta (stopId, route, direction, stopName){
 			if (x == "<tr><td><strong></strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>"){
 				x = "<tr><td><strong>未來60分鐘沒有由此站開出的班次</strong></td><td><input type='button' class='btnEta' value='循環線請按此' onclick=\"routeStopEta('" + stopId + "', '" + route + "', '" + oppositeDirection + "', '" + stopName + "')\" ></td><tr>";
 			}
-			document.getElementById("stationTable").innerHTML = x;
-			document.getElementById("stationList").style.display = "block";
+			document.getElementById("etaTable").innerHTML = x;
+			document.getElementById("etaList").style.display = "block";
 			document.getElementById("allEta").onclick = function () {allEta(stopId)};
 			document.getElementById("backRoute").style.display = "flex";
 			document.getElementById("loading").style.display = "none";
@@ -266,7 +272,7 @@ function searchRoute(){
 	let input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("routeSearch");
 	filter = input.value.toUpperCase();
-	table = document.getElementById("listTable");
+	table = document.getElementById("routeTable");
 	tr = table.getElementsByTagName("tr");
 	for (i = 1; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName("td")[0];
@@ -282,8 +288,8 @@ function searchRoute(){
 }
 
 function backToStopList(){
-	document.getElementById("routeList").style.display = "block";
-	document.getElementById("stationList").style.display = "none";
+	document.getElementById("stationList").style.display = "block";
+	document.getElementById("etaList").style.display = "none";
 	document.getElementById("stopName").style.display = "none";
 	document.getElementById("backRoute").style.display = "none";
 }
@@ -294,7 +300,7 @@ function allEta(stopId){
 	document.getElementById("routeList").style.display = "none";
 	document.getElementById("routeNumber").style.display = "none";
 	document.getElementById("loading").style.display = "block";
-	document.getElementById("stationList").style.display = "none";
+	document.getElementById("etaList").style.display = "none";
 	let dir, oppositeDirection;
 	console.log(stopId);
 	
@@ -345,8 +351,8 @@ function allEta(stopId){
 				//sequence++;
 				x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime + "</td></tr>";
 			}
-			document.getElementById("stationTable").innerHTML = x;
-			document.getElementById("stationList").style.display = "block";
+			document.getElementById("etaTable").innerHTML = x;
+			document.getElementById("etaList").style.display = "block";
 			//document.getElementById("backRoute").style.display = "flex";
 			document.getElementById("loading").style.display = "none";
 			//document.getElementById("allEta").onclick = "allEta('" + stopId + "');";
