@@ -312,7 +312,7 @@ function allEta(stopId){
 	xhttpr.open("GET", url, true);
 	
 	let x = "<tr><td><strong>路線</strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>";
-	let etaTime;
+	let etaTime, skip = false;
 
 	xhttpr.send();
 
@@ -350,8 +350,24 @@ function allEta(stopId){
 					etaTime = new Date(departureList[i]["eta"]);
 					etaTime = etaTime.toLocaleTimeString('en-HK', {hourCycle: 'h23'});
 				}
-				//sequence++;
-				x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime + "</td></tr>";
+				if (i == departureList.length - 1 && !skip){
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime + "</td></tr>";
+				} else if (skip){
+					x = x + "<p style='font-size: 18px; margin: 0px 0px;'>" + etaTime + "</p>";
+					if (i == departureList.length - 1){
+						x += "</td></tr>";
+						continue;
+					}
+					if (departureList[i]["route"] != departureList[i + 1]["route"] || departureList[i]["dest"] != departureList[i + 1]["dest"]){
+						skip = false;
+						x += "</td></tr>";
+					}
+				} else if (departureList[i]["route"] == departureList[i + 1]["route"] && departureList[i]["dest"] == departureList[i + 1]["dest"]){
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime;
+					skip = true;
+				} else {
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime + "</td></tr>";
+				}
 			}
 			document.getElementById("etaTable").innerHTML = x;
 			document.getElementById("etaList").style.display = "block";

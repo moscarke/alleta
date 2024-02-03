@@ -240,7 +240,7 @@ function allEta(stopId){
 	document.getElementById("routeNumber").style.display = "none";
 	document.getElementById("loading").style.display = "block";
 	document.getElementById("etaList").style.display = "none";
-	let dir, oppositeDirection, etaTime, specialDeparture, remark;
+	let dir, oppositeDirection, etaTime, specialDeparture, remark, skip = false;
 	const routeDepartList = [];
 	console.log(stopId);
 	
@@ -306,10 +306,28 @@ function allEta(stopId){
 				}
 				remark = "";
 				if (departureList[i]["rmk_tc"] != ""){
-					remark = "<br><p style='font-size: 75%;color: lightcyan;margin: 0px 0px;'>" + departureList[i]["rmk_tc"] + "</p>";
+					remark = "<span style='font-size: 75%;color: lightcyan;margin: 0px 0px;'> - " + departureList[i]["rmk_tc"] + "</span>";
 				}
-				//sequence++;
-				x = x + "<tr><td>" + departureList[i]["route"] + specialDeparture + "</td><td>" + departureList[i]["dest_tc"] + "</td><td>" + etaTime + remark + "</td></tr>";
+				// merge rows if they are the same route and destination
+				if (i == departureList.length - 1 && !skip){
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest_tc"] + "</td><td>" + etaTime + remark + "</td></tr>";
+				} else if (skip){
+					x = x + "<p style='font-size: 18px; margin: 0px 0px;'>" + etaTime + remark + "</p>";
+					if (i == departureList.length - 1){
+						x += "</td></tr>";
+						continue;
+					}
+					if (departureList[i]["route"] != departureList[i + 1]["route"] || departureList[i]["dest_tc"] != departureList[i + 1]["dest_tc"]){
+						skip = false;
+						x += "</td></tr>";
+					}
+				} else if (departureList[i]["route"] == departureList[i + 1]["route"] && departureList[i]["dest_tc"] == departureList[i + 1]["dest_tc"]){
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest_tc"] + "</td><td>" + etaTime + remark;
+					skip = true;
+				} else {
+					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest_tc"] + "</td><td>" + etaTime + remark + "</td></tr>";
+				}
+				//x = x + "<tr><td>" + departureList[i]["route"] + specialDeparture + "</td><td>" + departureList[i]["dest_tc"] + "</td><td>" + etaTime + remark + "</td></tr>";
 			}
 			document.getElementById("etaTable").innerHTML = x;
 			document.getElementById("etaList").style.display = "block";
