@@ -6,23 +6,6 @@ document.getElementById("routeList").style.display = "block";
 document.getElementById("hph").style.display = "block";
 }
 
-function queryKmbRoute(){
-// document.getElementById("stationList").style.display = "none";
-document.getElementById("routeList").style.display = "none";
-// document.getElementById("queryBtn").style.display = "none";
-document.getElementById("loading").style.display = "block";
-
-google.script.run.withSuccessHandler(
-  function (a){
-	document.getElementById("listTable").innerHTML = a;
-	document.getElementById("routeList").style.display = "block";
-
-	document.getElementById("loading").style.display = "none";
-	document.getElementById("hph").style.display = "block";
-  }
-).kmbQueryHTML();
-}
-
 function depPlace(line){
 	document.getElementById("pgOne").style.display = "none";
 	document.getElementById("line").innerHTML = line;
