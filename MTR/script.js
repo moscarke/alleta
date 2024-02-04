@@ -40,6 +40,8 @@ function schQuery(stopId){
 					x += "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td>Error: " + raw["message"] + "</td></tr></table>";
 				} else if (raw["curr_time"] == "-"){
 					x += "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td>Error: Status temporarily not available. (2)</td></tr></table>";
+				} else if (raw["data"][lineStation]["UP"] == "" && raw["data"][lineStation]["DOWN"] == "") {
+					x += "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td>尾班車已開出</td></tr></table>";
 				} else {
 					list = raw["data"][lineStation];
 					x = x + "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td><strong>抵站時間</strong></td><td><strong>終點站</strong></td><td><strong>月台</strong></td></tr>";
@@ -99,7 +101,6 @@ function changeTable (line){
 	const collection = document.getElementsByTagName("table");
 	for (let i = 0; i < collection.length; i++){
 		collection[i].style.display = "none";
-		collection[i].style["background-color"] = "#0B0";
 	}
 	const btnCollection = document.getElementsByTagName("button");
 	for (let i = 0; i < btnCollection.length; i++){
