@@ -74,12 +74,14 @@ function schQuery(stopId){
 					}
 					x = x + "</table>";
 				}
-				y += "<button class='btnMtrLine' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
+				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
 				if (apiReceived == allLine.length){
 					document.getElementById("lin").innerText = allLine[0]["name"] + "站";
-					document.getElementById("loading").style.display = "none";
+					let line = document.getElementById("line").innerText;
 					document.getElementById("etaList").innerHTML = y + "</div>" + x;
-					document.getElementById(allLine[0]["line"]).style.display = "";
+					document.getElementById(line).style.display = "";
+					document.getElementById("btn" + line).style["background-color"] = "#006B00";
+					document.getElementById("loading").style.display = "none";
 				}
 			} else {
 				//idk do sth
@@ -93,8 +95,14 @@ function changeTable (line){
 	const collection = document.getElementsByTagName("table");
 	for (let i = 0; i < collection.length; i++){
 		collection[i].style.display = "none";
+		collection[i].style["background-color"] = "#0B0";
+	}
+	const btnCollection = document.getElementsByTagName("button");
+	for (let i = 0; i < btnCollection.length; i++){
+		btnCollection[i].style["background-color"] = "#0B0";
 	}
 	document.getElementById(line).style.display = "";
+	document.getElementById("btn" + line).style["background-color"] = "#006B00";
 }
 
 function hptoHome(){
