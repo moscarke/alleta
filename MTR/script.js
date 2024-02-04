@@ -19,6 +19,10 @@ function schQuery(stopId){
 			allLine.push({line: response[i]["line"], sta: response[i]["code"], name: response[i]["name"]});
 		}
 	}
+	//special case for Racecourse station because it's not in the csv of MTR routes
+	if (stopId == "RAC"){
+		allLine.push({line: "EAL", sta: "RAC", name: "馬場"});
+	}
 	
 	for (let i = 0; i < allLine.length; i++){
 		const url = "https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?line=" + allLine[i]["line"] + "&sta=" + allLine[i]["sta"];
