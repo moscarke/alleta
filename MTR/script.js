@@ -33,10 +33,10 @@ function schQuery(stopId){
 				raw = JSON.parse(xhttpr.response);
 				apiReceived++;
 				if (raw["status"] == 0){
-					x += "<table id='" + allLine[i]["line"] + "' class='timetable' style='display: none'><tr><td>Error: " + raw["message"] + "</td></tr></table>"
+					x += "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td>Error: " + raw["message"] + "</td></tr></table>"
 				} else {
 					list = raw["data"][lineStation];
-					x = x + "<table id='" + allLine[i]["line"] + "' class='timetable' style='display: none'><tr><td><strong>抵站時間</strong></td><td><strong>終點站</strong></td><td><strong>月台</strong></td></tr>";
+					x = x + "<table id='" + allLine[i]["line"] + "' class='timetable mtrTable' style='display: none'><tr><td><strong>抵站時間</strong></td><td><strong>終點站</strong></td><td><strong>月台</strong></td></tr>";
 					if (list["UP"] != null){
 						for (let j = 0; j < list["UP"].length; j++){
 							note = "";

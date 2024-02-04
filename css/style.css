@@ -107,6 +107,16 @@ cursor: pointer;
 	white-space: normal;
 } 
 
+.mtrTable td {
+	border: 1px solid white;
+	padding: 4px 4px;
+	text-align: left;
+	/*background-color: #04AA6D;*/
+	color: white;
+	font-size: 20px;
+	white-space: normal;
+} 
+
 .timetable input{
 	font-size: 24px;
 }
