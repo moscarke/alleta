@@ -15,9 +15,9 @@ xhttpr.onload = ()=> {
 		for (let i = 1; i < responseArr.length - 1; i++){
 			stopList.push(responseArr[i].split(","));
 			var a = responseArr[i].split(",");
-			for (let j = 0; j < a.length; j++){
+			/*for (let j = 0; j < a.length; j++){
 				a[j] = a[j].substring(1, a[j].length-1);
-			}
+			}*/
 			routeList.push({route: a[0], orig_tc: a[1].split("至")[0], dest_tc: a[1].split("至")[1], dir: "O"});
 			if (a[1].slice(-5) != "(循環線)"){
 				routeList.push({route: a[0], orig_tc: a[1].split("至")[1], dest_tc: a[1].split("至")[0], dir: "I"});
@@ -97,9 +97,9 @@ function routeStop(route, direction, destination){
 			for (let i = 1; i < responseArr.length; i++){
 				stopList.push(responseArr[i].split(","));
 				var a = responseArr[i].split(",");
-				for (let j = 0; j < a.length; j++){
+				/*for (let j = 0; j < a.length; j++){
 					a[j] = a[j].substring(1, a[j].length-1);
-				}
+				}*/
 				if (a[0] == route && a[1] == direction){
 					start = true;
 					stationList.push({name: a[6], id: a[3]});
