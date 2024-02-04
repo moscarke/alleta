@@ -66,7 +66,7 @@ function schQuery(stopId){
 						for (let j = 0; j < list["DOWN"].length; j++){
 							note = "";
 							if (allLine[i]["line"] == "EAL"){
-								if (list["UP"][j]["route"] == "RAC"){
+								if (list["DOWN"][j]["route"] == "RAC"){
 									note = "<span style='font-size: 75%'>經馬場</span>";
 								}
 							}
