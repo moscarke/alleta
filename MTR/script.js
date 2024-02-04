@@ -40,7 +40,7 @@ function schQuery(station){
 	document.getElementById("stat").style.display = "none";
 	document.getElementById("loading").style.display = "block";
 	var sta = mtrStationCode(station);
-	document.getElementById("sta").innerHTML = sta;
+	document.getElementById("lin").innerHTML = sta + "站";
 	
 	const name = line + "-" + station;
 	
