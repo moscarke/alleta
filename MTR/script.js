@@ -8,7 +8,7 @@ function depPlace(line){
 	for (let i = 0; i < response.length; i++){
 		if (response[i]["line"] == line){
 			start = true;
-			x += "<tr><td>" + sequence + "</td><td><button class='btnEta' style='text-align: left;' onclick='schQuery(\"" + response[i]["code"] + "\");'>" + response[i]["name"] + "</button></td></tr>";
+			x += "<tr><td>" + sequence + "</td><td><button class='btnEta' style='text-align: left;' onclick='schQuery(\"" + response[i]["code"] + "\",\"" + response[i]["line"] + "\");'>" + response[i]["name"] + "</button></td></tr>";
 			sequence++;
 			continue;
 		}
@@ -18,13 +18,11 @@ function depPlace(line){
 		}
 	}
 	
-	//var divName = line + "Div";
 	document.getElementById("stationList").innerHTML = x;
-	//document.getElementById(divName).style.display = "block";
 	document.getElementById("lin").innerHTML = mtrLineName(line);
 }
 
-function schQuery(stopId){
+function schQuery(stopId, line){
 	let distance, stop, stop_id, allLine = [], apiReceived = 0, x = "", y = "<div class='centerDiv'>", note = "";
 	
 	document.getElementById("stationList").style.display = "none";
@@ -99,7 +97,7 @@ function schQuery(stopId){
 				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
 				if (apiReceived == allLine.length){
 					document.getElementById("lin").innerText = allLine[0]["name"] + "站";
-					let line = document.getElementById("line").innerText;
+					line = line || allLine[0]["line"];
 					document.getElementById("etaList").innerHTML = y + "</div>" + x;
 					document.getElementById(line).style.display = "";
 					document.getElementById("btn" + line).style["background-color"] = "#006B00";
