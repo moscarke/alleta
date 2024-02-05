@@ -74,7 +74,7 @@ cursor: pointer;
 	cursor: pointer;
 }
 
-.timetable {
+.homepageTable {
 	font-family: Arial, Helvetica, sans-serif;
 	border: 1px solid white;
 	/*background-color: #04AA6D;*/
@@ -82,7 +82,7 @@ cursor: pointer;
 	width: 100%;
 }
 
-.timetable td {
+.homepageTable td {
 	border: 1px solid white;
 	padding: 8px 8px;
 	text-align: left;
@@ -92,45 +92,45 @@ cursor: pointer;
 	white-space: normal;
 } 
 
-.timetable input{
+.homepageTable input{
 	font-size: 24px;
 	background-color: #04AA6D;
 }
 
-.timetable button{
+.homepageTable button{
 	font-size: 24px;
 	background-color: #04AA6D;
 }
 /*
-.timetable tr{
+.homepageTable tr{
 	background-color: #04AA6D;
 }
 
-.timetable tr input{
-	background-color: #04AA6D;
-	border-color: #04AA6D;
-}
-
-.timetable tr button{
+.homepageTable tr input{
 	background-color: #04AA6D;
 	border-color: #04AA6D;
 }
 
-.timetable tr:nth-child(even){
+.homepageTable tr button{
+	background-color: #04AA6D;
+	border-color: #04AA6D;
+}
+
+.homepageTable tr:nth-child(even){
 	background-color: #3fc300;
 }
 
-.timetable tr:nth-child(even) input{
+.homepageTable tr:nth-child(even) input{
 	background-color: #3fc300;
 	border-color: #3fc300;
 }
 
-.timetable tr:nth-child(even) button{
+.homepageTable tr:nth-child(even) button{
 	background-color: #3fc300;
 	border-color: #3fc300;
 }
 
-.timetable tr:nth-child(1){
+.homepageTable tr:nth-child(1){
 	background-color: #017300;
 }
 */
