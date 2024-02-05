@@ -2,35 +2,14 @@ label{
 	font-family:  Arial, sans-serif;
 }
 
-.hOne{
-	display: block;
-	font-size: 2em;
-	font-family:  Arial, Helvetica, sans-serif;
-	margin-top: 0.67em;
-	margin-bottom: 0.67em;
-	margin-left: 0;
-	margin-right: 0;
-	font-weight: bold;
-
-}
-.centerDiv{
+.centerDiv{/**/
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 }
-.rightDiv{
-	display: flex;
-	justify-content: right;
-	align-items: right;
-	height: 100%;
-}
-.disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
-}
 
-.btnOne {
+.btnOne {/**/
 	background-color: #28CAB2; 
 	border: none;
 	color: white;
@@ -44,7 +23,7 @@ label{
 	cursor: pointer;
 }
 
-.btnMtrLine {
+.btnMtrLine {/**/
 	background-color: #0B0; 
 	border: none;
 	color: white;
@@ -58,23 +37,7 @@ label{
 	cursor: pointer;
 }
 
-.btnTwo {
-	background-color: #FF6600; 
-	border: none;
-	color: white;
-	padding: 36px 16px;
-	width: 100%;
-	//height: 50%;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 400%;
-	margin: 2px 2px;
-	transition-duration: 0.4s;
-	cursor: pointer;
-}
-
-.btnThree {
+.btnThree {/*MTR*/
 	background-color: #28CAB2; 
 	border: none;
 	color: white;
@@ -107,7 +70,7 @@ label{
 	white-space: normal;
 } 
 
-.mtrTable td {
+.mtrTable td {/**/
 	border: 1px solid white;
 	padding: 4px 4px;
 	text-align: left;
@@ -161,48 +124,21 @@ label{
 	padding: 8px 8px;
 }
 
-.datetable {
-font-family: Arial, Helvetica, sans-serif;
-border: 1px solid #ddd;
-background-color: #FFFFFF;
-width: 100%;
+.loadingsrn {/**/
+	color: #D8D835;
+	font-weight: bold;
+	font-size: 72px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.datetable td {
-//border: 1px solid #ddd;
-//padding-top: 12px;
-//padding-bottom: 12px;
-text-align: left;
-background-color: #FFFFFF;
-//color: white;
-//font-size: 150%;
-} 
-
-.datetable tr{
-width: 100%;
-}
-
-
-.loadingsrn {
-color: #D8D835;
-font-weight: bold;
-font-size: 72px;
-font-family: Arial, Helvetica, sans-serif;
-}
-
-.inputOne {
-width: 15%;
-padding: 12px 20px;
-margin: 8px 0;
-box-sizing: border-box;
-}
+/*This is to remove the spin button for number input*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
--webkit-appearance: none;
-margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
-.btnOrigin{
+.btnOrigin{/**/
 	background-color: #28CAB2; 
 	border-bottom: 10px solid #28CAB2;
 	border-top: 10px solid #28CAB2;
@@ -220,7 +156,7 @@ margin: 0;
 	white-space: normal;
 }
 
-.btnEta{
+.btnEta{/**/
 	background-color: #28CAB2; 
 	border-bottom: 10px solid #28CAB2;
 	border-top: 10px solid #28CAB2;
@@ -237,7 +173,7 @@ margin: 0;
 	cursor: pointer;
 }
 
-.routeSearch{
+.routeSearch{/***/
 	background-image: url('../images/searchicon.png');
 	background-position: 10px 10px;
 	background-repeat: no-repeat;
