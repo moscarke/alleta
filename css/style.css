@@ -1,33 +1,33 @@
 label{
-font-family:  Arial, sans-serif;
+	font-family:  Arial, sans-serif;
 }
 
 .hOne{
-display: block;
-font-size: 2em;
-font-family:  Arial, Helvetica, sans-serif;
-margin-top: 0.67em;
-margin-bottom: 0.67em;
-margin-left: 0;
-margin-right: 0;
-font-weight: bold;
+	display: block;
+	font-size: 2em;
+	font-family:  Arial, Helvetica, sans-serif;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
 
 }
 .centerDiv{
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 .rightDiv{
-display: flex;
-justify-content: right;
-align-items: right;
-height: 100%;
+	display: flex;
+	justify-content: right;
+	align-items: right;
+	height: 100%;
 }
 .disabled {
-opacity: 0.6;
-cursor: not-allowed;
+	opacity: 0.6;
+	cursor: not-allowed;
 }
 
 .btnOne {
@@ -59,34 +59,34 @@ cursor: not-allowed;
 }
 
 .btnTwo {
-background-color: #FF6600; 
-border: none;
-color: white;
-padding: 36px 16px;
-width: 100%;
-//height: 50%;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 400%;
-margin: 2px 2px;
-transition-duration: 0.4s;
-cursor: pointer;
+	background-color: #FF6600; 
+	border: none;
+	color: white;
+	padding: 36px 16px;
+	width: 100%;
+	//height: 50%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 400%;
+	margin: 2px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .btnThree {
-background-color: #28CAB2; 
-border: none;
-color: white;
-padding: 18px 12px;
-width: 50%;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 200%;
-margin: 2px 2px;
-transition-duration: 0.4s;
-cursor: pointer;
+	background-color: #28CAB2; 
+	border: none;
+	color: white;
+	padding: 18px 12px;
+	width: 50%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 200%;
+	margin: 2px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .timetable {
@@ -238,7 +238,7 @@ margin: 0;
 }
 
 .routeSearch{
-	background-image: url('searchicon.png');
+	background-image: url('../images/searchicon.png');
 	background-position: 10px 10px;
 	background-repeat: no-repeat;
 	width: 50%;
