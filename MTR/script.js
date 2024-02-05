@@ -3,7 +3,11 @@ const response = [{"name":"博覽館","line":"AEL","code":"AWE","lat":22.3220939
 function depPlace(line){
 	document.getElementById("pgOne").style.display = "none";
 	document.getElementById("line").innerHTML = line;
+	
+	
+	
 	var divName = line + "Div";
+	document.getElementById("station").innerHTML;
 	document.getElementById(divName).style.display = "block";
 	document.getElementById("lin").innerHTML = mtrLineName(line);
 }
@@ -11,7 +15,7 @@ function depPlace(line){
 function schQuery(stopId){
 	let distance, stop, stop_id, allLine = [], apiReceived = 0, x = "", y = "<div class='centerDiv'>", note = "";
 	
-	document.getElementById("stat").style.display = "none";
+	document.getElementById("station").style.display = "none";
 	document.getElementById("loading").style.display = "block";
 		
 	for (let i = 0; i < response.length; i++){
