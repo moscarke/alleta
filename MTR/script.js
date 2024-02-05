@@ -3,7 +3,6 @@ const response = [{"name":"博覽館","line":"AEL","code":"AWE","lat":22.3220939
 function depPlace(line){
 	let start, x = "<table class='timetable' id='" + line + "Div'><tr><td></td><td>港鐵站</td></tr>", sequence = 1;
 	document.getElementById("routeList").style.display = "none";
-	document.getElementById("line").innerHTML = line;
 	
 	for (let i = 0; i < response.length; i++){
 		if (response[i]["line"] == line){
@@ -125,7 +124,10 @@ function changeTable (line){
 }
 
 function hptoHome(){
-	window.location.reload();
+	document.getElementById("stationList").style.display = "none";
+	document.getElementById("etaList").style.display = "none";
+	document.getElementById("loading").style.display = "none";
+	document.getElementById("routeList").style.display = "";
 }
 
 function mtrLineName(code) {
