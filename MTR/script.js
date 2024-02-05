@@ -18,7 +18,7 @@ function depPlace(line){
 	}
 	
 	document.getElementById("stationList").innerHTML = x;
-	document.getElementById("lin").innerHTML = mtrLineName(line);
+	document.getElementByIdheading.innerHTML = mtrLineName(line);
 }
 
 function schQuery(stopId, line){
@@ -95,7 +95,7 @@ function schQuery(stopId, line){
 				}
 				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
 				if (apiReceived == allLine.length){
-					document.getElementById("lin").innerText = allLine[0]["name"] + "站";
+					document.getElementByIdheading.innerText = allLine[0]["name"] + "站";
 					line = line || allLine[0]["line"];
 					document.getElementById("etaList").innerHTML = y + "</div>" + x;
 					document.getElementById(line).style.display = "";
