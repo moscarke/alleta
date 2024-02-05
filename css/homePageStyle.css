@@ -60,18 +60,18 @@ cursor: pointer;
 }
 
 .btnThree {
-background-color: #28CAB2; 
-border: none;
-color: white;
-padding: 18px 12px;
-width: 50%;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 200%;
-margin: 2px 2px;
-transition-duration: 0.4s;
-cursor: pointer;
+	background-color: #28CAB2; 
+	border: none;
+	color: white;
+	padding: 18px 12px;
+	width: 50%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 200%;
+	margin: 2px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .timetable {

@@ -37,7 +37,7 @@ label{
 	cursor: pointer;
 }
 
-.btnThree {/*MTR*/
+.btnThree {/*MTR and homepage*/
 	background-color: #28CAB2; 
 	border: none;
 	color: white;
@@ -51,6 +51,16 @@ label{
 	transition-duration: 0.4s;
 	cursor: pointer;
 }
+
+.mtrTable td {/**/
+	border: 1px solid white;
+	padding: 4px 4px;
+	text-align: left;
+	/*background-color: #04AA6D;*/
+	color: white;
+	font-size: 20px;
+	white-space: normal;
+} 
 
 .timetable {
 	font-family: Arial, Helvetica, sans-serif;
@@ -67,16 +77,6 @@ label{
 	/*background-color: #04AA6D;*/
 	color: white;
 	font-size: 24px;
-	white-space: normal;
-} 
-
-.mtrTable td {/**/
-	border: 1px solid white;
-	padding: 4px 4px;
-	text-align: left;
-	/*background-color: #04AA6D;*/
-	color: white;
-	font-size: 20px;
 	white-space: normal;
 } 
 
