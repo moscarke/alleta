@@ -152,6 +152,22 @@ label{
 	background-color: #04AA6D;
 }
 
+/*Used in homepage buttons*/
+.btnPage {
+	background-color: #28CAB2; 
+	border: none;
+	color: white;
+	padding: 18px 12px;
+	width: 100%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 200%;
+	margin: 2px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
 .loadingsrn {/**/
 	color: #D8D835;
 	font-weight: bold;
