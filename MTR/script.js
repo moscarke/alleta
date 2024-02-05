@@ -18,7 +18,7 @@ function depPlace(line){
 	}
 	
 	document.getElementById("stationList").innerHTML = x;
-	document.getElementByIdheading.innerHTML = mtrLineName(line);
+	document.getElementById("heading").innerHTML = mtrLineName(line);
 }
 
 function schQuery(stopId, line){
@@ -95,7 +95,7 @@ function schQuery(stopId, line){
 				}
 				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
 				if (apiReceived == allLine.length){
-					document.getElementByIdheading.innerText = allLine[0]["name"] + "站";
+					document.getElementById("heading").innerText = allLine[0]["name"] + "站";
 					line = line || allLine[0]["line"];
 					document.getElementById("etaList").innerHTML = y + "</div>" + x;
 					document.getElementById(line).style.display = "";
@@ -124,8 +124,10 @@ function changeTable (line){
 }
 
 function hptoHome(){
-	document.getElementById("stationList").style.display = "none";
-	document.getElementById("etaList").style.display = "none";
+	document.getElementById("stationList").innerHTML = "";
+	document.getElementById("etaList").innerHTML = "";
+	document.getElementById("stationList").style.display = "";
+	document.getElementById("etaList").style.display = "";
 	document.getElementById("loading").style.display = "none";
 	document.getElementById("routeList").style.display = "";
 }
