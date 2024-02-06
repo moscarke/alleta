@@ -124,6 +124,7 @@ function changeTable (line){
 }
 
 function hptoHome(){
+	document.getElementById("heading").innerHTML = "";
 	document.getElementById("stationList").innerHTML = "";
 	document.getElementById("etaList").innerHTML = "";
 	document.getElementById("stationList").style.display = "";
