@@ -45,7 +45,7 @@ function getClosestStop (){
 			shortestDistance = distance;
 		}
 	}
-	document.getElementById("heading").innerHTML += "<button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
+	document.getElementById("heading").innerHTML = "<span style='vertical-align: middle;'>鄰近車站: </span><button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
 	//schQuery(stopId);
 }
 
