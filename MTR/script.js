@@ -23,7 +23,7 @@ function showError(error) {
 		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請允許GPS</span>";
 		  break;
 		case error.POSITION_UNAVAILABLE:
-		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>GPS無法使用</span>";
+		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請開啟GPS</span>";
 		  break;
 		case error.TIMEOUT:
 		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Timeout Error</span>";
