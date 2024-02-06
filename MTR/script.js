@@ -93,7 +93,7 @@ function schQuery(stopId, line){
 					}
 					x = x + "</table>";
 				}
-				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")' style='border-radius: 5px'>" + mtrLineName(allLine[i]["line"]) + "</button>";
+				y += "<button class='btnMtrLine' id='btn" + allLine[i]["line"] + "' onclick='changeTable(\"" + allLine[i]["line"] + "\")'>" + mtrLineName(allLine[i]["line"]) + "</button>";
 				if (apiReceived == allLine.length){
 					document.getElementById("heading").innerText = allLine[0]["name"] + "站";
 					line = line || allLine[0]["line"];
