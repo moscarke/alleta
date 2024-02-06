@@ -20,16 +20,16 @@ function showPosition(position) {
 function showError(error) {
 	switch(error.code) {
 		case error.PERMISSION_DENIED:
-		  document.getElementById("heading").innerHTML = "鄰近車站: 請允許定位服務";
+		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請允許定位服務</span>";
 		  break;
 		case error.POSITION_UNAVAILABLE:
-		  document.getElementById("heading").innerHTML = "鄰近車站: 定位服務無法使用";
+		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>定位服務無法使用</span>";
 		  break;
 		case error.TIMEOUT:
-		  document.getElementById("heading").innerHTML = "鄰近車站: Timeout Error";
+		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Timeout Error</span>";
 		  break;
 		case error.UNKNOWN_ERROR:
-		  document.getElementById("heading").innerHTML = "鄰近車站: Unknown Error";
+		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Unknown Error</span>";
 		  break;
 	}
 }
