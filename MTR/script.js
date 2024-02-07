@@ -9,13 +9,9 @@ if (navigator.geolocation) {
 }
 
 function showPosition(position) {
-	const xhttpr = new XMLHttpRequest();
-	let info = window.navigator.userAgent;
 	lat = position.coords.latitude, lng = position.coords.longitude, accuracy = position.coords.accuracy;
 	console.log(lat + ", " + lng);
-	let url = appScriptUrl + "?q=markdown&des=MTR-Info&lat=" + lat + "&lng=" + lng + "&acc=" + accuracy + "&info=User Agent: " + info;
-	xhttpr.open("GET", url, true);
-	xhttpr.send();
+	markdown("MTR-Info", lat, lng, accuracy);
 	getClosestStop();
 }
 
@@ -34,9 +30,13 @@ function showError(error) {
 		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Unknown Error</span>";
 		  break;
 	}
+	markdown("MTR-Info", "", "Error: ", error.message);
+}
+
+function markdown(description, latitude, longitude, accuracy){
 	const xhttpr = new XMLHttpRequest();
-	let info = window.navigator.userAgent;
-	let url = appScriptUrl + "?q=markdown&des=MTR-Info&lat=&lng=Error: &acc=" + error.message + "&info=User Agent: " + info;
+	let info = window.navigator.userAgent, platform = window.navigator.platform;
+	let url = appScriptUrl + "?q=markdown&des=" + description + "&lat=" + latitude + "&lng=" + longitude + "&acc=" + accuracy + "&info=User Agent: " + info + " Platform: " + platform;
 	xhttpr.open("GET", url, true);
 	xhttpr.send();
 }
