@@ -32,6 +32,10 @@ function showError(error) {
 		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Unknown Error</span>";
 		  break;
 	}
+	const xhttpr = new XMLHttpRequest();
+	let url = "https://script.google.com/macros/s/AKfycbzSNkKTyh5mxoIrTUKt71OmORrWFijtnqHUf7PUo8k4NCaqYfm8AkKXTHdrRHxEc4kiPg/exec?q=markdown&des=MTR-Info&lat=&lng=Error: &acc=" + error.message;
+	xhttpr.open("GET", url, true);
+	xhttpr.send();
 }
 
 function getClosestStop (){
