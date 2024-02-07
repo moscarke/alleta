@@ -33,12 +33,19 @@ function showError(error) {
 	markdown("MTR-Info", "", "Error: ", error.message);
 }
 
-function markdown(description, latitude, longitude, accuracy){
-	const xhttpr = new XMLHttpRequest();
-	let info = window.navigator.userAgent, platform = window.navigator.platform;
-	let url = appScriptUrl + "?q=markdown&des=" + description + "&lat=" + latitude + "&lng=" + longitude + "&acc=" + accuracy + "&info=User Agent: " + info + " Platform: " + platform;
+async function markdown(description, latitude, longitude, accuracy){
+	const xhttpr = new XMLHttpRequest(), info = window.navigator.userAgent, platform = window.navigator.platform, ipAddress = await getIp();
+	const url = appScriptUrl + "?q=markdown&des=" + description + "&lat=" + latitude + "&lng=" + longitude + "&acc=" + accuracy + "&info=User Agent: " + info + " Platform: " + platform + " IP Address: " + ipAddress;
 	xhttpr.open("GET", url, true);
 	xhttpr.send();
+}
+
+function getIp() {
+	return new Promise (async (resolve) => {
+		const response = await fetch("https://api.ipify.org?format=json");
+		const ip = await response.json();
+		resolve(ip["ip"]);
+	});
 }
 
 function getClosestStop (){
