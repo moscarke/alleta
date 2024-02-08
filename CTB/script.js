@@ -101,7 +101,6 @@ function routeInfo(route, direction, callback){
 	xhttpr.send();
 }
 
-
 function hptoHome(){
 	document.getElementById("routeSearch").style.display = "block";
 	document.getElementById("stationList").style.display = "none";
