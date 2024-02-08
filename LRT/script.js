@@ -37,7 +37,7 @@ routeList.sort(function(a, b) {
 
 for (let i = 0; i < routeList.length; i++){
 	x = x + "<tr><td>" + routeList[i]["route"] + "</td><td>";
-	x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "', '" + routeList[i]["dest_tc"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
+	x = x + "<button class='btnOrigin' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "', '" + routeList[i]["dest_tc"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 }
 
 document.getElementById("routeTable").innerHTML = x;
