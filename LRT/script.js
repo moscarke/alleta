@@ -188,8 +188,6 @@ function allEta(responseList){
 	}
 	document.getElementById("etaTable").innerHTML = x;
 	document.getElementById("etaList").style.display = "block";
-	//document.getElementById("backRoute").style.display = "flex";
-	//document.getElementById("allEta").onclick = function () {allEta(responseList)};
 	document.getElementById("loading").style.display = "none";
 }
 
