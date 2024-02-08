@@ -27,6 +27,7 @@ xhttpr.onload = ()=> {
 			}
 			currentRoute = a[0], currentDirection = a[1];
 		}
+		
 		routeList.sort(function(a, b) {
 			var routeA = String(a["route"]);
 			var routeB = String(b["route"]);
