@@ -163,9 +163,7 @@ function allEta(responseList){
 	document.getElementById("routeNumber").style.display = "none";
 	document.getElementById("loading").style.display = "block";
 	document.getElementById("etaList").style.display = "none";
-	let dir, oppositeDirection, etaTime, platformNumber, remark, departureList;
-	//const routeDepartList = [];
-	let x = "<tr><td><strong>路線</strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>";
+	let dir, oppositeDirection, etaTime, platformNumber, remark, departureList, x = "<tr><td><strong>路線</strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>";
 	
 	let sequence = 0;
 	for (let i = 0; i < responseList.length; i++){
