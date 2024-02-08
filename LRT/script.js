@@ -64,14 +64,11 @@ function routeStop(route, direction, destination){
 	document.getElementById("routeSearch").value = "";
 	document.getElementById("loading").style.display = "block";
 	
-	const stationList = [];
-	let info = "", start, j = 0, x = "<tr><td><strong></strong></td><td><strong>輕鐵站</strong></td></tr>";
+	let start, j = 0, x = "<tr><td><strong></strong></td><td><strong>輕鐵站</strong></td></tr>";
 
 	for (let i = 1; i < stopList.length; i++){
 		if (stopList[i][0] == route && stopList[i][1] == direction){
-			start = true;
-			stationList.push({name: stopList[i][4], id: stopList[i][3]});
-			j++;
+			start = true, j++;
 			x = x + "<tr><td>" + j + "</td><td><button class='btnEta' style='text-align: left' onclick=\"routeStopEta('" + stopList[i][3] + "', '" + route + "', '" + direction + "', '" + stopList[i][4] + "', '" +  destination + "')\">" + stopList[i][4] + "</button></td></tr>";
 			continue;
 		}
