@@ -52,7 +52,7 @@ function getIp() {
 }
 
 function getClosestStop (){
-	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stop_id;
+	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stopId;
 	let y = "<div class='centerDiv'>", note = "";
 	for (let i = 0; i < response.length; i++){
 		distance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[i]["lat"]), parseFloat(response[i]["long"]));
@@ -106,7 +106,7 @@ function depPlace(line){
 }
 
 function schQuery(stopId, line){
-	let distance, stop_id, allLine = [], apiReceived = 0, x = "", y = "<div class='centerDiv'>", note = "";
+	let distance, allLine = [], apiReceived = 0, x = "", y = "<div class='centerDiv'>", note = "";
 	
 	document.getElementById("routeList").style.display = "none";
 	document.getElementById("stationList").style.display = "none";
