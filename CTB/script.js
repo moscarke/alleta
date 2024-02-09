@@ -29,8 +29,9 @@ const customSort = (a, b) => {
 	return 0;
 };
 
-let lastUpdate = new Date(window.localStorage.getItem("lastUpdate")), currentDate = new Date;
+let lastUpdate = new Date(window.localStorage.getItem("lastUpdate")), currentDate = new Date(), weekAgo = new Date();
 currentDate.setDate(currentDate.getHours() - 48);
+weekAgo.setDate(weekAgo.getHours() - 168);
 if (window.localStorage.getItem("routeListHTML") && lastUpdate > currentDate){
 	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("routeListHTML");
 	document.getElementById("routeList").style.display = "block";
