@@ -241,14 +241,11 @@ function allEta(stopId){
 				if (departureList[i]["wheelChair"] == 0){
 					wheelchairRemark = "<p style='font-size: 75%;color: lightcyan;margin: 0px 0px;'>高地台巴士</p>";
 				}
-				//sequence++;
 				x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + remark + "</td><td>" + etaTime + timeRemark + wheelchairRemark + "</td></tr>";
 			}
 			document.getElementById("etaTable").innerHTML = x;
 			document.getElementById("etaList").style.display = "block";
-			//document.getElementById("backRoute").style.display = "flex";
 			document.getElementById("loading").style.display = "none";
-			//document.getElementById("allEta").onclick = "allEta('" + stopId + "');";
 		}
 	}
 }
