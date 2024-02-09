@@ -60,8 +60,7 @@ function routeStop(routeId, route, destination){
 
 	xhttpr.send();
 	
-	let j, remark;
-	let x = "<tr><td><strong></strong></td><td><strong>巴士站</strong></td></tr>";
+	let j, remark, fare, x = "<tr><td><strong></strong></td><td><strong>巴士站</strong></td></tr>";
 
 	xhttpr.onload = ()=> {
 		if (xhttpr.status == 200){
@@ -73,7 +72,16 @@ function routeStop(routeId, route, destination){
 				if (stationList[i]["someDepartureObserveOnly"] == 1){
 					remark = "<p style='font-size: 75%;color: lightcyan;margin: 0px 0px;'>部份班次途經此站</p>"
 				}
-				x = x + "<tr><td>" + j + "</td><td><button class='btnEta' style='text-align: left' onclick=\"routeStopEta('" + routeId + "', '" + stationList[i]["stopId"] + "', '" + stationList[i]["stopName_c"] + "', '"+ destination + "')\">" + stationList[i]["stopName_c"] + remark + "</button></td></tr>";
+				if (stationList[i]["fare"] != stationList[i]["fareHoliday"] && stationList[i]["fare"] != 0 && stationList[i]["fareHoliday"] != 0){
+					fare = "<p style='font-size: 75%;color: #ffff99;margin: 0px 0px;'>平日車資: $" + stationList[i]["fare"] + " 假日車資: $" + stationList[i]["fareHoliday"] + "</p>";
+				} else if (stationList[i]["fare"] == 0 && stationList[i]["fareHoliday"] != 0){
+					fare = "<p style='font-size: 75%;color: #ffff99;margin: 0px 0px;'>車資: $" + stationList[i]["fareHoliday"] + "</p>";
+				} else if (stationList[i]["fareHoliday"] == 0 && stationList[i]["fare"] == 0){
+					fare = "";
+				} else {
+					fare = "<p style='font-size: 75%;color: #ffff99;margin: 0px 0px;'>車資: $" + stationList[i]["fare"] + "</p>";
+				}
+				x = x + "<tr><td>" + j + "</td><td><button class='btnEta' style='text-align: left' onclick=\"routeStopEta('" + routeId + "', '" + stationList[i]["stopId"] + "', '" + stationList[i]["stopName_c"] + "', '"+ destination + "')\">" + stationList[i]["stopName_c"] + remark + fare + "</button></td></tr>";
 			}
 			
 			document.getElementById("stationTable").innerHTML = x;
