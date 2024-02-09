@@ -62,21 +62,6 @@ function getIp() {
 	});
 }
 
-function getClosestStop (){
-	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stopId;
-	let y = "<div class='centerDiv'>", note = "";
-	for (let i = 0; i < response.length; i++){
-		distance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[i]["lat"]), parseFloat(response[i]["long"]));
-		if (distance < shortestDistance){
-			stop = response[i]["name"];
-			stopId = response[i]["code"];
-			shortestDistance = distance;
-		}
-	}
-	document.getElementById("heading").innerHTML = "<span style='vertical-align: middle;'>鄰近車站: </span><button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
-	nearbyInformation = document.getElementById("heading").innerHTML;
-}
-
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	var R = 6371; // Radius of the earth in km
 	var dLat = deg2rad(lat2-lat1);  // deg2rad below
