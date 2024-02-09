@@ -302,16 +302,13 @@ function allEta(stopId){
 	document.getElementById("routeNumber").style.display = "none";
 	document.getElementById("loading").style.display = "block";
 	document.getElementById("etaList").style.display = "none";
-	let dir, oppositeDirection;
 	console.log(stopId);
-	
 	
 	const url = "https://rt.data.gov.hk/v1/transport/batch/stop-eta/ctb/" + stopId + "?lang=zh-hant";
 	const xhttpr = new XMLHttpRequest();
 	xhttpr.open("GET", url, true);
 	
-	let x = "<tr><td><strong>路線</strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>";
-	let etaTime, skip = false;
+	let x = "<tr><td><strong>路線</strong></td><td><strong>目的地</strong></td><td><strong>到站時間</strong></td></tr>", etaTime, skip = false;
 
 	xhttpr.send();
 
@@ -370,9 +367,7 @@ function allEta(stopId){
 			}
 			document.getElementById("etaTable").innerHTML = x;
 			document.getElementById("etaList").style.display = "block";
-			//document.getElementById("backRoute").style.display = "flex";
 			document.getElementById("loading").style.display = "none";
-			//document.getElementById("allEta").onclick = "allEta('" + stopId + "');";
 		}
 	}
 }
