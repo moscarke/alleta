@@ -12,7 +12,18 @@ function showPosition(position) {
 	lat = position.coords.latitude, lng = position.coords.longitude, accuracy = position.coords.accuracy;
 	console.log(lat + ", " + lng);
 	markdown("MTR-Info", lat, lng, accuracy);
-	getClosestStop();
+	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stopId;
+	let y = "<div class='centerDiv'>", note = "";
+	for (let i = 0; i < response.length; i++){
+		distance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[i]["lat"]), parseFloat(response[i]["long"]));
+		if (distance < shortestDistance){
+			stop = response[i]["name"];
+			stopId = response[i]["code"];
+			shortestDistance = distance;
+		}
+	}
+	document.getElementById("heading").innerHTML = "<span style='vertical-align: middle;'>鄰近車站: </span><button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
+	nearbyInformation = document.getElementById("heading").innerHTML;
 }
 
 function showError(error) {
