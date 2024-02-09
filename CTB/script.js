@@ -32,8 +32,8 @@ const customSort = (a, b) => {
 let lastUpdate = new Date(window.localStorage.getItem("lastUpdate")), currentDate = new Date(), weekAgo = new Date();
 currentDate.setDate(currentDate.getHours() - 48);
 weekAgo.setDate(weekAgo.getHours() - 168);
-if (window.localStorage.getItem("routeListHTML") && lastUpdate > currentDate){
-	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("routeListHTML");
+if (window.localStorage.getItem("ctbRouteList") && lastUpdate > currentDate){
+	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("ctbRouteList");
 	document.getElementById("routeList").style.display = "block";
 	document.getElementById("waiting").style.display = "none";
 } else {
@@ -89,7 +89,7 @@ function finishRoute (routeList){
 	}
 	
 	window.localStorage.setItem("lastUpdate", new Date);
-	window.localStorage.setItem("routeListHTML", x);
+	window.localStorage.setItem("ctbRouteList", x);
 	
 	document.getElementById("routeTable").innerHTML = x;
 	document.getElementById("routeList").style.display = "block";
