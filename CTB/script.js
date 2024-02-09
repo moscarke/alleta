@@ -29,51 +29,66 @@ const customSort = (a, b) => {
 	return 0;
 };
 
-const url = "https://rt.data.gov.hk/v2/transport/citybus/route/ctb";
-const xhttpr = new XMLHttpRequest();
-const routeList = [];
-let apiResponded = 0;
-xhttpr.open("GET", url, true);
+let lastUpdate = new Date(window.localStorage.getItem("lastUpdate")), currentDate = new Date;
+currentDate.setDate(currentDate.getHours() - 48);
+if (window.localStorage.getItem("routeListHTML") && lastUpdate > currentDate){
+	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("routeListHTML");
+	document.getElementById("routeList").style.display = "block";
+	document.getElementById("waiting").style.display = "none";
+} else {
+	getRoute();
+}
 
-xhttpr.send();
+function getRoute(){
+	const url = "https://rt.data.gov.hk/v2/transport/citybus/route/ctb";
+	const xhttpr = new XMLHttpRequest();
+	const routeList = [];
+	let apiResponded = 0;
+	xhttpr.open("GET", url, true);
 
-xhttpr.onload = () => {
-	if (xhttpr.status == 200){
-		const response = JSON.parse(xhttpr.response);
-		const list = response["data"];
-		for (let i = 0; i < list.length; i++){
-			routeInfo(list[i]["route"], "inbound", function(data){
-				apiResponded += 0.5;
-				if (data != ""){
-					routeList.push({route: list[i]["route"], dest_tc: list[i]["orig_tc"], orig_tc: list[i]["dest_tc"].split("(經")[0], dir: "inbound"});
-				}
-				if (apiResponded >= list.length){
-					finishRoute(routeList);
-				}
-			});
-			routeInfo(list[i]["route"], "outbound", function(data){
-				apiResponded += 0.5;
-				if (data != ""){
-					routeList.push({route: list[i]["route"], orig_tc: list[i]["orig_tc"].split("(經")[0], dest_tc: list[i]["dest_tc"], dir: "outbound"});
-				}
-				if (apiResponded >= list.length){
-					finishRoute(routeList);
-				}
-			});
+	xhttpr.send();
+
+	xhttpr.onload = () => {
+		if (xhttpr.status == 200){
+			const response = JSON.parse(xhttpr.response);
+			const list = response["data"];
+			for (let i = 0; i < list.length; i++){
+				routeInfo(list[i]["route"], "inbound", function(data){
+					apiResponded += 0.5;
+					if (data != ""){
+						routeList.push({route: list[i]["route"], dest_tc: list[i]["orig_tc"], orig_tc: list[i]["dest_tc"].split("(經")[0], dir: "inbound"});
+					}
+					if (apiResponded >= list.length){
+						finishRoute(routeList);
+					}
+				});
+				routeInfo(list[i]["route"], "outbound", function(data){
+					apiResponded += 0.5;
+					if (data != ""){
+						routeList.push({route: list[i]["route"], orig_tc: list[i]["orig_tc"].split("(經")[0], dest_tc: list[i]["dest_tc"], dir: "outbound"});
+					}
+					if (apiResponded >= list.length){
+						routeList.sort(customSort);
+						finishRoute(routeList);
+					}
+				});
+			}
+		} else {
+			apiResponded += 0.5;
+			//idk do sth
 		}
-	} else {
-		apiResponded += 0.5;
-		//idk do sth
 	}
 }
 
-function finishRoute (routeList){
+function finishRoute (routeList){	
 	let x = "<tr><td style='width:14%;'><strong>路線</strong></td><td style='width:86%;'><strong>方向</strong></td></tr>";
-	routeList.sort(customSort);
 	for (let i = 0;i < routeList.length; i++){
 		x = x + "<tr><td>" + routeList[i]["route"] + "</td><td>";
 		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 	}
+	
+	window.localStorage.setItem("lastUpdate", new Date);
+	window.localStorage.setItem("routeListHTML", x);
 	
 	document.getElementById("routeTable").innerHTML = x;
 	document.getElementById("routeList").style.display = "block";
