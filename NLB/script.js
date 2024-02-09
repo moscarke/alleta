@@ -185,8 +185,7 @@ function allEta(stopId){
 	document.getElementById("etaList").style.display = "none";
 	let dir, oppositeDirection, etaTime, specialDeparture, remark;
 	console.log(stopId);
-	
-	
+		
 	const url = "https://rt.data.gov.hk/v1/transport/batch/stop-eta/nlb/" + stopId + "?lang=zh-hant";
 	const xhttpr = new XMLHttpRequest();
 	xhttpr.open("GET", url, true);
