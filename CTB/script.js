@@ -29,18 +29,20 @@ const customSort = (a, b) => {
 	return 0;
 };
 
-let lastUpdate = new Date(window.localStorage.getItem("lastUpdate")), currentDate = new Date(), weekAgo = new Date();
+let lastUpdate = new Date(window.localStorage.getItem("ctbUpdate")), currentDate = new Date(), weekAgo = new Date();
 currentDate.setDate(currentDate.getHours() - 48);
 weekAgo.setDate(weekAgo.getHours() - 168);
 if (window.localStorage.getItem("ctbRouteList") && lastUpdate > currentDate){
 	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("ctbRouteList");
 	document.getElementById("routeList").style.display = "block";
 	document.getElementById("waiting").style.display = "none";
-} else {
+} else if (window.localStorage.getItem("ctbRouteList") && lastUpdate > weekAgo) {
 	getRoute();
+} else {
+	getRoute(true);
 }
 
-function getRoute(){
+function getRoute(update){
 	const url = "https://rt.data.gov.hk/v2/transport/citybus/route/ctb";
 	const xhttpr = new XMLHttpRequest();
 	const routeList = [];
@@ -60,7 +62,7 @@ function getRoute(){
 						routeList.push({route: list[i]["route"], dest_tc: list[i]["orig_tc"], orig_tc: list[i]["dest_tc"].split("(經")[0], dir: "inbound"});
 					}
 					if (apiResponded >= list.length){
-						finishRoute(routeList);
+						finishRoute(routeList, update);
 					}
 				});
 				routeInfo(list[i]["route"], "outbound", function(data){
@@ -70,7 +72,7 @@ function getRoute(){
 					}
 					if (apiResponded >= list.length){
 						routeList.sort(customSort);
-						finishRoute(routeList);
+						finishRoute(routeList, update);
 					}
 				});
 			}
@@ -81,19 +83,21 @@ function getRoute(){
 	}
 }
 
-function finishRoute (routeList){	
+function finishRoute (routeList, update){	
 	let x = "<tr><td style='width:14%;'><strong>路線</strong></td><td style='width:86%;'><strong>方向</strong></td></tr>";
 	for (let i = 0;i < routeList.length; i++){
 		x = x + "<tr><td>" + routeList[i]["route"] + "</td><td>";
 		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 	}
 	
-	window.localStorage.setItem("lastUpdate", new Date);
+	window.localStorage.setItem("ctbUpdate", new Date);
 	window.localStorage.setItem("ctbRouteList", x);
 	
-	document.getElementById("routeTable").innerHTML = x;
-	document.getElementById("routeList").style.display = "block";
-	document.getElementById("waiting").style.display = "none";
+	if (update){
+		document.getElementById("routeTable").innerHTML = x;
+		document.getElementById("routeList").style.display = "block";
+		document.getElementById("waiting").style.display = "none";
+	}
 }
 
 function routeInfo(route, direction, callback){
