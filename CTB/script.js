@@ -91,7 +91,7 @@ function finishRoute (routeList, update){
 		x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + routeList[i]["route"] + "', '" + routeList[i]["dir"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + routeList[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + routeList[i]["dest_tc"] + "</p></button></td></tr>";
 	}
 	
-	window.localStorage.setItem("ctbUpdate", new Date);
+	window.localStorage.setItem("ctbUpdate", new Date());
 	window.localStorage.setItem("ctbRouteList", x);
 	
 	if (update){
