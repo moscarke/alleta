@@ -181,10 +181,7 @@ input::-webkit-inner-spin-button {
 
 .btnOrigin{/**/
 	background-color: #28CAB2; 
-	/*border-bottom: 10px solid #28CAB2;
-	border-top: 10px solid #28CAB2;
-	border-left: none;
-	border-right: none;*/
+	border: none;
 	color: white;
 	text-decoration: none;
 	font-size: 18px;
@@ -197,11 +194,8 @@ input::-webkit-inner-spin-button {
 }
 
 .btnEta{/**/
-	background-color: #28CAB2; 
-	/*border-bottom: 10px solid #28CAB2;
-	border-top: 10px solid #28CAB2;
-	border-left: none;
-	border-right: none;*/
+	background-color: #28CAB2;
+	border: none;
 	color: white;
 	text-decoration: none;
 	width: 100%;
