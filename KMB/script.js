@@ -1,39 +1,56 @@
-const url = "https://data.etabus.gov.hk/v1/transport/kmb/route/";
-const xhttpr = new XMLHttpRequest();
-xhttpr.open("GET", url, true);
-
-xhttpr.send();
-
-xhttpr.onload = ()=> {
-	if (xhttpr.status == 200){
-		const response = JSON.parse(xhttpr.response);
-		const list = response["data"];
-		let x = "<tr><td style='width:14%;'><strong>路線</strong></td><td style='width:86%;'><strong>方向</strong></td></tr>";
-		let dir, specialDeparture;
-
-		for (let i = 0;i < list.length; i++){
-			if (list[i]["bound"] == "I"){
-				dir = "inbound";
-			} else {
-				dir = "outbound";
-			}
-			specialDeparture = "";
-			if (list[i]["service_type"] != 1){
-				specialDeparture = "<br><p style='font-size: 75%;color: #FFEC31;margin: 0px 0px'>特別班</p>";
-			}
-			x = x + "<tr><td>" + list[i]["route"] + specialDeparture + "</td><td>";
-			x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + list[i]["route"] + "', '" + dir + "', '" + list[i]["service_type"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + list[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + list[i]["dest_tc"] + "</p></button></td></tr>";
-		}
-		
-		document.getElementById("routeTable").innerHTML = x;
-		document.getElementById("routeList").style.display = "block";
-
-		document.getElementById("waiting").style.display = "none";
-	} else {
-		//idk do sth
-	}
+let lastUpdate = new Date(window.localStorage.getItem("kmbUpdate")), currentDate = new Date(), weekAgo = new Date();
+currentDate.setDate(currentDate.getHours() - 48);
+weekAgo.setDate(weekAgo.getHours() - 168);
+if (window.localStorage.getItem("kmbRouteList") && lastUpdate > currentDate){
+	document.getElementById("routeTable").innerHTML = window.localStorage.getItem("kmbRouteList");
+	document.getElementById("routeList").style.display = "block";
+	document.getElementById("waiting").style.display = "none";
+} else if (window.localStorage.getItem("kmbRouteList") && lastUpdate > weekAgo) {
+	getRoute();
+} else {
+	getRoute(true);
 }
 
+function getRoute(update){
+	const url = "https://data.etabus.gov.hk/v1/transport/kmb/route/";
+	const xhttpr = new XMLHttpRequest();
+	xhttpr.open("GET", url, true);
+
+	xhttpr.send();
+
+	xhttpr.onload = ()=> {
+		if (xhttpr.status == 200){
+			const response = JSON.parse(xhttpr.response);
+			const list = response["data"];
+			let x = "<tr><td style='width:14%;'><strong>路線</strong></td><td style='width:86%;'><strong>方向</strong></td></tr>", dir, specialDeparture;
+
+			for (let i = 0;i < list.length; i++){
+				if (list[i]["bound"] == "I"){
+					dir = "inbound";
+				} else {
+					dir = "outbound";
+				}
+				specialDeparture = "";
+				if (list[i]["service_type"] != 1){
+					specialDeparture = "<br><p style='font-size: 75%;color: #FFEC31;margin: 0px 0px'>特別班</p>";
+				}
+				x = x + "<tr><td>" + list[i]["route"] + specialDeparture + "</td><td>";
+				x = x + "<button class='btnOrigin' type='button' onclick=\"routeStop('" + list[i]["route"] + "', '" + dir + "', '" + list[i]["service_type"] + "')\"><p style='font-size: 75%;margin: 0px 0px'>" + list[i]["orig_tc"] + "</p><p style='margin: 0px 0px'><span style='font-size: 75%'>往</span> " + list[i]["dest_tc"] + "</p></button></td></tr>";
+			}
+			
+			window.localStorage.setItem("kmbUpdate", new Date());
+			window.localStorage.setItem("kmbRouteList", x);
+			
+			if (update){
+				document.getElementById("routeTable").innerHTML = x;
+				document.getElementById("routeList").style.display = "block";
+				document.getElementById("waiting").style.display = "none";
+			}
+		} else {
+			//idk do sth
+		}
+	}
+}
 
 function hptoHome(){
 	document.getElementById("routeSearch").style.display = "block";
