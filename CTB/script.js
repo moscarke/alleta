@@ -62,6 +62,7 @@ function getRoute(update){
 						routeList.push({route: list[i]["route"], dest_tc: list[i]["orig_tc"], orig_tc: list[i]["dest_tc"].split("(經")[0], dir: "inbound"});
 					}
 					if (apiResponded >= list.length){
+						routeList.sort(customSort);
 						finishRoute(routeList, update);
 					}
 				});
