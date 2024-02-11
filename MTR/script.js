@@ -22,24 +22,28 @@ function showPosition(position) {
 			shortestDistance = distance;
 		}
 	}
-	document.getElementById("heading").innerHTML = "<span style='vertical-align: middle;'>鄰近車站: </span><button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
-	nearbyInformation = document.getElementById("heading").innerHTML;
+	if (document.getElementById("routeList").style.display != "none"){
+		nearbyInformation = "<span style='vertical-align: middle;'>鄰近車站: </span><button class='btnMtrLine' onclick='schQuery(\"" + stopId + "\");'>" + stop + "</button>";
+		document.getElementById("heading").innerHTML = nearbyInformation;
+	}
 }
 
 function showError(error) {
-	switch(error.code) {
-		case error.PERMISSION_DENIED:
-		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請允許GPS</span>";
-		  break;
-		case error.POSITION_UNAVAILABLE:
-		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請開啟GPS</span>";
-		  break;
-		case error.TIMEOUT:
-		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Timeout Error</span>";
-		  break;
-		case error.UNKNOWN_ERROR:
-		  document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Unknown Error</span>";
-		  break;
+	if (document.getElementById("routeList").style.display != "none"){
+		switch(error.code) {
+			case error.PERMISSION_DENIED:
+				document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請允許GPS</span>";
+				break;
+			case error.POSITION_UNAVAILABLE:
+				document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>請開啟GPS</span>";
+				break;
+			case error.TIMEOUT:
+				document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Timeout Error</span>";
+				break;
+			case error.UNKNOWN_ERROR:
+				document.getElementById("heading").innerHTML = "鄰近車站: <span style='color: red;'>Unknown Error</span>";
+				break;
+		}
 	}
 	markdown("MTR-Info", "", "Error: ", error.message);
 }
@@ -126,7 +130,7 @@ function schQuery(stopId, line){
 
 		xhttpr.send();
 
-		xhttpr.onload = ()=> {
+		xhttpr.onload = () => {
 			if (xhttpr.status == 200){
 				raw = JSON.parse(xhttpr.response);
 				apiReceived++;
@@ -184,6 +188,7 @@ function schQuery(stopId, line){
 					document.getElementById("loading").style.display = "none";
 				}
 			} else {
+				apiReceived++;
 				//idk do sth
 			}
 		}
