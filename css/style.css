@@ -65,16 +65,16 @@ label{
 	padding: 4px 4px;
 	text-align: left;
 	color: white;
-	font-size: 24px;
+	font-size: 20px;
 	white-space: normal;
 } 
 
 .timetable input{
-	font-size: 24px;
+	font-size: 20px;
 }
 
 .timetable button{
-	font-size: 24px;
+	font-size: 20px;
 }
 
 .timetable tr{
@@ -181,10 +181,10 @@ input::-webkit-inner-spin-button {
 
 .btnOrigin{/**/
 	background-color: #28CAB2; 
-	border-bottom: 10px solid #28CAB2;
+	/*border-bottom: 10px solid #28CAB2;
 	border-top: 10px solid #28CAB2;
 	border-left: none;
-	border-right: none;
+	border-right: none;*/
 	color: white;
 	text-decoration: none;
 	font-size: 18px;
@@ -198,10 +198,10 @@ input::-webkit-inner-spin-button {
 
 .btnEta{/**/
 	background-color: #28CAB2; 
-	border-bottom: 10px solid #28CAB2;
+	/*border-bottom: 10px solid #28CAB2;
 	border-top: 10px solid #28CAB2;
 	border-left: none;
-	border-right: none;
+	border-right: none;*/
 	color: white;
 	text-decoration: none;
 	width: 100%;
