@@ -364,7 +364,7 @@ function allEta(stopId){
 				if (i == departureList.length - 1 && !skip){
 					x = x + "<tr><td>" + departureList[i]["route"] + "</td><td>" + departureList[i]["dest"] + "</td><td>" + etaTime + "</td></tr>";
 				} else if (skip){
-					x = x + "<p style='font-size: 18px; margin: 0px 0px;'>" + etaTime + "</p>";
+					x = x + "<p style='font-size: 75%; margin: 0px 0px;'>" + etaTime + "</p>";
 					if (i == departureList.length - 1){
 						x += "</td></tr>";
 						continue;
