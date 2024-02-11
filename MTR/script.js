@@ -9,12 +9,12 @@ if (navigator.geolocation) {
 }
 
 function showPosition(position) {
-	let lat = position.coords.latitude, lng = position.coords.longitude, accuracy = position.coords.accuracy;
+	let lat = position.coords.latitude, lng = position.coords.longitude, accuracy = position.coords.accuracy, y = "<div class='centerDiv'>", note = "";
+	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stopId;
+	
 	console.log(lat + ", " + lng);
 	markdown("MTR-Info", lat, lng, accuracy);
 	
-	let shortestDistance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[0]["lat"]), parseFloat(response[0]["long"])), distance, stop, stopId;
-	let y = "<div class='centerDiv'>", note = "";
 	for (let i = 0; i < response.length; i++){
 		distance = getDistanceFromLatLonInKm(lat, lng, parseFloat(response[i]["lat"]), parseFloat(response[i]["long"]));
 		if (distance < shortestDistance){
