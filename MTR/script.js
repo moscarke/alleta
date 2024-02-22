@@ -3,7 +3,7 @@ const appScriptUrl = "https://script.google.com/macros/s/AKfycbyerovyJhwPACBq_7R
 let nearbyInformation, getTimeInterval;
 
 if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(showPosition, showError);
+	navigator.geolocation.watchPosition(showPosition, showError, {enableHighAccuracy: true});
 } else {
 	document.getElementById("heading").innerHTML = "";
 }
